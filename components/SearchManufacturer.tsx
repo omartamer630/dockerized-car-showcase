@@ -36,7 +36,6 @@ const SearchManufacturer: React.FC<Props> = ({
     <div className="search-manufacturer">
       <Combobox value={currentManufact} onChange={setCurrentManufact}>
         <div className="relative w-full">
-          {/* Button for the combobox. Click on the icon to see the complete dropdown */}
           <ComboboxButton className="absolute top-[14px]">
             <Image
               src="/car-logo.svg"
@@ -46,25 +45,21 @@ const SearchManufacturer: React.FC<Props> = ({
               alt="car logo"
             />
           </ComboboxButton>
-
-          {/* Input field for searching */}
           <ComboboxInput
             className="search-manufacturer__input"
             displayValue={(item: string) => item}
-            onChange={(event) => setQuery(event.target.value)} // Update the search query when the input changes
+            onChange={(event) => setQuery(event.target.value)}
             placeholder="Volkswagen..."
           />
-
-          {/* Transition for displaying the options */}
           <Transition
-            as={React.Fragment} // group multiple elements without introducing an additional DOM node i.e., <></>
+            as={React.Fragment}
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            afterLeave={() => setQuery("")} // Reset the search query after the transition completes
+            afterLeave={() => setQuery("")}
           >
             <ComboboxOptions
-              className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              className="absolute  mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
               static
             >
               {filterMans.length === 0 && query !== "" ? (
@@ -72,7 +67,7 @@ const SearchManufacturer: React.FC<Props> = ({
                   value={query}
                   className="search-manufacturer__option"
                 >
-                  Create "{query}"
+                  Couldn't find {query}
                 </ComboboxOption>
               ) : (
                 filterMans.map((item) => (
@@ -97,9 +92,7 @@ const SearchManufacturer: React.FC<Props> = ({
                         {selected ? (
                           <span
                             className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                              active
-                                ? "text-white"
-                                : "text-pribg-primary-purple"
+                              active ? "text-white" : "text-primary-purple"
                             }`}
                           ></span>
                         ) : null}
