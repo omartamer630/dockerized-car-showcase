@@ -12,13 +12,13 @@ import { manufacturers } from "@/constants";
 import Image from "next/image";
 
 interface Props {
-  setCurrentManufact: (value: string) => void;
-  currentManufact: string;
+  setManufacturer: (value: string) => void;
+  manufacturer: string;
 }
 
 const SearchManufacturer: React.FC<Props> = ({
-  setCurrentManufact,
-  currentManufact,
+  setManufacturer,
+  manufacturer,
 }) => {
   const [query, setQuery] = React.useState("");
 
@@ -33,10 +33,10 @@ const SearchManufacturer: React.FC<Props> = ({
         );
 
   return (
-    <div className="search-manufacturer">
-      <Combobox value={currentManufact} onChange={setCurrentManufact}>
+    <div className="search-manufacturer relative">
+      <Combobox value={manufacturer} onChange={setManufacturer}>
         <div className="relative w-full">
-          <ComboboxButton className="absolute top-[14px]">
+          <ComboboxButton className="absolute inset-y-0 left-0 flex items-center pl-3">
             <Image
               src="/car-logo.svg"
               width={20}
@@ -45,12 +45,15 @@ const SearchManufacturer: React.FC<Props> = ({
               alt="car logo"
             />
           </ComboboxButton>
+
           <ComboboxInput
             className="search-manufacturer__input"
             displayValue={(item: string) => item}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Volkswagen..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Car type"
           />
+
           <Transition
             as={React.Fragment}
             leave="transition ease-in duration-100"
@@ -59,7 +62,7 @@ const SearchManufacturer: React.FC<Props> = ({
             afterLeave={() => setQuery("")}
           >
             <ComboboxOptions
-              className="absolute  mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
               static
             >
               {filterMans.length === 0 && query !== "" ? (
@@ -73,12 +76,12 @@ const SearchManufacturer: React.FC<Props> = ({
                 filterMans.map((item) => (
                   <ComboboxOption
                     key={item}
+                    value={item}
                     className={({ active }) =>
                       `relative search-manufacturer__option ${
                         active ? "bg-primary-blue text-white" : "text-gray-900"
                       }`
                     }
-                    value={item}
                   >
                     {({ selected, active }) => (
                       <>
@@ -89,13 +92,15 @@ const SearchManufacturer: React.FC<Props> = ({
                         >
                           {item}
                         </span>
-                        {selected ? (
+                        {selected && (
                           <span
                             className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
                               active ? "text-white" : "text-primary-purple"
                             }`}
-                          ></span>
-                        ) : null}
+                          >
+                            ✔️
+                          </span>
+                        )}
                       </>
                     )}
                   </ComboboxOption>
