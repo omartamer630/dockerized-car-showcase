@@ -1,13 +1,30 @@
 import Hero from "@/components/Hero";
 import CustomFilter from "@/components/CustomFilter";
 import SearchBar from "@/components/SearchBar";
-import CarCard, { Props as CarProps } from "@/components/CarCard"; // Import the component and types
+import CarCard, { CarProps } from "@/components/CarCard"; // Import the component and types
 import { fetchCars } from "@/utils";
+import { fuels, yearsOfProduction } from "@/constants";
 import "./globals.css";
 
-export default async function Home() {
-  const allCars = await fetchCars();
-  console.log(allCars);
+interface FilterProps {
+  manufacturer?: string;
+  year?: number;
+  model?: string;
+  limit?: number;
+  fuel?: string;
+}
+
+interface HomeProps {
+  searchParams: FilterProps;
+}
+export default async function Home({ searchParams }: HomeProps) {
+  const allCars = await fetchCars({
+    manufacturer: searchParams.manufacturer || "",
+    year: searchParams.year || 2022,
+    fuel: searchParams.fuel || "",
+    limit: searchParams.limit || 10,
+    model: searchParams.model || "",
+  });
 
   const isDataEmpty =
     !allCars || allCars.length === 0 || !Array.isArray(allCars);
@@ -23,17 +40,17 @@ export default async function Home() {
         <div className="home__filters">
           <SearchBar />
           <div className="home__filter-container">
-            <CustomFilter title={"Fuel"} />
-            <CustomFilter title={"Year"} />
+            <CustomFilter title={"Year"} options={yearsOfProduction} />
+            <CustomFilter title={"fuel"} options={fuels} />
           </div>
         </div>
         {!isDataEmpty ? (
           <section>
             <div className="home__cars-wrapper">
-              {allCars.map((car: CarProps) => (
+              {allCars.map((car) => (
                 <CarCard
                   key={`${car.model} ${Date.now() * Math.random()}`}
-                  carProp={car}
+                  car={car}
                 />
               ))}
             </div>
@@ -50,3 +67,4 @@ export default async function Home() {
     </main>
   );
 }
+export type { FilterProps };

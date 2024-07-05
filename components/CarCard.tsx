@@ -4,6 +4,7 @@ import { calculateCarRent } from "@/utils";
 import CustomButton from "./CustomButton";
 import CarDetails from "./CarDetails";
 import Image from "next/image";
+import { generateCarImageUrl } from "@/utils";
 
 interface Props {
   city_mpg: number;
@@ -21,10 +22,10 @@ interface Props {
 }
 
 interface CarProps {
-  carProp: Props;
+  car: Props;
 }
 
-const CarCard = ({ carProp }: CarProps) => {
+const CarCard = ({ car }: CarProps) => {
   const {
     city_mpg,
     class: carClass,
@@ -38,12 +39,11 @@ const CarCard = ({ carProp }: CarProps) => {
     model,
     transmission,
     year,
-  } = carProp;
+  } = car;
 
   const [isOpen, setIsOpen] = React.useState(false);
-
-  const currentYear = new Date().getFullYear();
-  const rentRate = calculateCarRent(city_mpg, year, currentYear);
+  const img = generateCarImageUrl(car);
+  const rentRate = calculateCarRent(city_mpg, year);
   const handleClick = () => {
     setIsOpen(true);
     console.log("Button clicked");
@@ -57,12 +57,12 @@ const CarCard = ({ carProp }: CarProps) => {
       </div>
       <p className="flex mt-6 text-[32px] font-extrabold">
         <span className="self-start text-[14px] font-semibold">$</span>
-        {/* {rentRate} */} 
+        {rentRate}
         <span className="self-end text-[14px] font-medium">/day</span>
       </p>
       <div className="relative w-full h-40 my-3 object-contain">
         <Image
-          src="/hero.png"
+          src={"/hero.png"}
           alt="car"
           fill
           priority
@@ -105,11 +105,11 @@ const CarCard = ({ carProp }: CarProps) => {
       <CarDetails
         isOpen={isOpen}
         closeModel={() => setIsOpen(false)}
-        // car={carProp}
+        car={car}
       />
     </div>
   );
 };
 
 export default CarCard;
-export type { Props, CarProps };
+export type { CarProps, Props };

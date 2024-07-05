@@ -12,12 +12,12 @@ import { manufacturers } from "@/constants";
 import Image from "next/image";
 
 interface Props {
-  setManufacturer: (value: string) => void;
+  setManuFacturer: (value: string) => void;
   manufacturer: string;
 }
 
 const SearchManufacturer: React.FC<Props> = ({
-  setManufacturer,
+  setManuFacturer,
   manufacturer,
 }) => {
   const [query, setQuery] = React.useState("");
@@ -34,7 +34,7 @@ const SearchManufacturer: React.FC<Props> = ({
 
   return (
     <div className="search-manufacturer relative">
-      <Combobox value={manufacturer} onChange={setManufacturer}>
+      <Combobox value={manufacturer} onChange={setManuFacturer}>
         <div className="relative w-full">
           <ComboboxButton className="absolute inset-y-0 left-0 flex items-center pl-3">
             <Image
@@ -49,7 +49,6 @@ const SearchManufacturer: React.FC<Props> = ({
           <ComboboxInput
             className="search-manufacturer__input"
             displayValue={(item: string) => item}
-            value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Car type"
           />
@@ -62,7 +61,7 @@ const SearchManufacturer: React.FC<Props> = ({
             afterLeave={() => setQuery("")}
           >
             <ComboboxOptions
-              className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              className="absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
               static
             >
               {filterMans.length === 0 && query !== "" ? (
