@@ -83,11 +83,11 @@ const CarCard = ({ car }: CarProps) => {
             </p>
           </div>
           <div className="flex flex-col justify-center items-center gap-2">
-            <Image src={"tire.svg"} alt="tire" height={20} width={20} />
+            <Image src={"/tire.svg"} alt="tire" height={20} width={20} />
             <p className="text-[14px]">{drive.toUpperCase()}</p>
           </div>
           <div className="flex flex-col justify-center items-center gap-2">
-            <Image src={"gas.svg"} alt="gas" height={20} width={20} />
+            <Image src={"/gas.svg"} alt="gas" height={20} width={20} />
             <p className="text-[14px]">{city_mpg} MPG</p>
           </div>
         </div>
