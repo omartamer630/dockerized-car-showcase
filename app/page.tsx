@@ -5,6 +5,7 @@ import CarCard, { CarProps } from "@/components/CarCard"; // Import the componen
 import { fetchCars } from "@/utils";
 import { fuels, yearsOfProduction } from "@/constants";
 import "./globals.css";
+import ShowMore from "@/components/ShowMore";
 
 interface FilterProps {
   manufacturer?: string;
@@ -28,6 +29,8 @@ export default async function Home({ searchParams }: HomeProps) {
 
   const isDataEmpty =
     !allCars || allCars.length === 0 || !Array.isArray(allCars);
+
+  console.log(allCars.length);
 
   return (
     <main className="overflow-hidden">
@@ -54,12 +57,14 @@ export default async function Home({ searchParams }: HomeProps) {
                 />
               ))}
             </div>
+            <ShowMore
+              pageNumber={(searchParams.limit || 10) / 10}
+              isNext={(searchParams.limit || 10) >= allCars.length}
+            />
           </section>
         ) : (
           <div className="home__error-container">
-            <h2 className="text-black text-xl font-bold">
-              Oops, try again later
-            </h2>
+            <h2 className="text-black text-xl font-bold">Oops, No results</h2>
             <p>{allCars?.message}</p>
           </div>
         )}
