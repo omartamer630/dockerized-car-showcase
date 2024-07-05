@@ -26,7 +26,7 @@ This project is a web application showcasing various cars. Users can view detail
 1. **Clone the repository**:
     ```bash
     git clone https://github.com/Khemu1/car-showcase
-    cd video-streaming-app
+    cd car-showcase
     ```
 
 2. **Install dependencies**:
