@@ -37,20 +37,20 @@ export const generateCarImageUrl = (
   angle: string = "0"
 ): string => {
   if (!car.make || !car.model || !car.year) {
-    console.log("somthing is missing");
+    console.error("Something is missing from the car object.");
+    return ""; // Return an empty string if any property is missing
   }
 
-  const url = new URL(
-    "https://cdn.imagin.studio/getimage?customer=hrjavascript-mastery&make=toyota&modelFamily=corolla&modelYear=2022&zoomType=fullscreen&angle=23&fileType=png"
-  );
   const { make, model, year } = car;
 
-  // url.searchParams.append("customer", "hrjavascript-mastery");
-  // url.searchParams.append("make", make);
-  // url.searchParams.append("modelFamily", model.split(" ")[0]);
-  // url.searchParams.append("zoomType", "fullscreen");
-  // url.searchParams.append("modelYear", `${year}`);
-  // url.searchParams.append("angle", angle);
+  const url = new URL("https://cdn.imagin.studio/getimage");
+  url.searchParams.append("customer", "hrjavascript-mastery");
+  url.searchParams.append("make", make);
+  url.searchParams.append("modelFamily", model.split(" ")[0]);
+  url.searchParams.append("zoomType", "fullscreen");
+  url.searchParams.append("modelYear", `${year}`);
+  url.searchParams.append("angle", angle);
+  url.searchParams.append("fileType", "png");
 
   return url.toString();
 };
@@ -61,6 +61,6 @@ export const updateSearchParams = (type: string, value: string) => {
   searchParams.set(type, value);
 
   const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
-  
+
   return newPathname;
 };

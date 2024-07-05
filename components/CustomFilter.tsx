@@ -25,6 +25,7 @@ const CustomFilter = ({ title, options }: Props) => {
   const [selected, setSelected] = React.useState(options[0]);
   const handleUpdateParams = (e: { title: string; value: string }) => {
     const newPathName = updateSearchParams(title, e.value.toLowerCase());
+    console.log(newPathName);
     router.push(newPathName, { scroll: false });
   };
   return (

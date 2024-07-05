@@ -16,6 +16,11 @@ const ShowMore = ({ pageNumber, isNext }: Props) => {
     const newPathNmae = updateSearchParams("limit", `${newLimit}`);
     router.push(newPathNmae, { scroll: false });
   };
+  const handleShowLess = () => {
+    const newLimit = (pageNumber - 1) * 10;
+    const newPathNmae = updateSearchParams("limit", `${newLimit}`);
+    router.push(newPathNmae, { scroll: false });
+  };
   return (
     <div className="w-full flex-center gap-5 mt-10">
       {isNext && (
@@ -23,6 +28,13 @@ const ShowMore = ({ pageNumber, isNext }: Props) => {
           title="Show More"
           buttonStyle="bg-primary-blue rounded-full text-white"
           handleClick={handleShowMore}
+        />
+      )}
+      {!isNext && (
+        <CustomButton
+          title="Show Less"
+          buttonStyle="bg-primary-blue rounded-full text-white"
+          handleClick={handleShowLess}
         />
       )}
     </div>
