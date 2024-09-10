@@ -12,6 +12,7 @@
     "@headlessui/react": "^2.1.1",
     "next": "14.2.4",
     "react": "^18",
+    "tailwindcss": "^3.4.1",
     "react-dom": "^18"
   },
   "devDependencies": {
@@ -19,7 +20,6 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
 }
