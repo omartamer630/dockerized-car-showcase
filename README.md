@@ -1,4 +1,4 @@
-# Car Showcase Project
+# Dockerized Car Showcase Project
 
 ## Overview
 This project is a web application showcasing various cars. Users can view details about each car, including make, model, year, and other specifications. The application is built using Next.js, React, and Tailwind CSS. Car images use a placeholder as the IMAGIN.studio API integration did not work as intended.
