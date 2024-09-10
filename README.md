@@ -29,7 +29,7 @@ This project is a web application showcasing various cars. Users can view detail
     cd dockerized-car-showcase
     ```
 
-2. **Install dependencies**:
+2. **Install Docker**:
 ```bash
 sudo apt update
 sudo apt install curl
@@ -42,7 +42,7 @@ sudo usermod -aG docker $USER
 newgrp docker
 ```
     
-3. **Start the build **:
+3. **Start to build **:
     ```bash
    docker build -t carshowcase .
     ```
