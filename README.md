@@ -26,18 +26,29 @@ This project is a web application showcasing various cars. Users can view detail
 1. **Clone the repository**:
     ```bash
     git clone https://github.com/Khemu1/car-showcase
-    cd car-showcase
+    cd dockerized-car-showcase
     ```
 
 2. **Install dependencies**:
-    ```bash
-    npm install
-    ```
+```bash
+sudo apt update
+sudo apt install curl
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg
+sudo add-apt-repository "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt update
+sudo apt -y install lsb-release gnupg apt-transport-https ca-certificates curl software-properties-common
+sudo apt -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-registry
+sudo usermod -aG docker $USER
+newgrp docker
+```
     
-3. **Start the development server**:
+3. **Start the build **:
     ```bash
-    npm run dev
+   docker build -t carshowcase .
     ```
-
-4. **Access the application**:
+5. **start the server**:
+    ```bash
+    docker run --name carshowcase -p 3000:3000 -d carshowcase
+    ```   
+5. **Access the application**:
    Open your browser and navigate to `http://localhost:3000`.
