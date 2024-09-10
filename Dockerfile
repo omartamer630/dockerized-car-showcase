@@ -1,3 +1,4 @@
+#Image Base stage
 FROM node:18 AS build
 
 WORKDIR /app
@@ -5,6 +6,8 @@ WORKDIR /app
 COPY . ./
 
 RUN npm install && npm run build
+
+#Light weight image
 
 FROM node:18-alpine 
 
